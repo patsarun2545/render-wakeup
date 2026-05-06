@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping dress-rental-web
-        run: curl --max-time 60 https://dress-rental-web.onrender.com/ping || true
+        run: curl --max-time 90 https://dress-rental-web.onrender.com/ping || true
 
       - name: Ping rental-management-system
-        run: curl --max-time 60 https://rental-management-system-8wzu.onrender.com/ping || true
+        run: curl --max-time 90 https://rental-management-system-8wzu.onrender.com/ping || true
