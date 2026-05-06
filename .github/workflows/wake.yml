@@ -2,9 +2,10 @@ name: Wake Render
 
 on:
   schedule:
-    - cron: '57 4 * * *'
-    - cron: '50 0 * * *'      # 07:50 น. ปลุก
-    - cron: '*/14 1-10 * * *' # 08:00-17:56 น. ping ทุก 14 นาที
+    - cron: '50 7 * * *'
+      timezone: "Asia/Bangkok"
+    - cron: '*/14 8-17 * * *'
+      timezone: "Asia/Bangkok"
   workflow_dispatch:
 
 jobs:
@@ -13,6 +14,5 @@ jobs:
     steps:
       - name: Ping dress-rental-web
         run: curl --max-time 90 https://dress-rental-web.onrender.com/ping || true
-
       - name: Ping rental-management-system
         run: curl --max-time 90 https://rental-management-system-8wzu.onrender.com/ping || true
