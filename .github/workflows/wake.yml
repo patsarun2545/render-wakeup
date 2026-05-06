@@ -2,10 +2,8 @@ name: Wake Render
 
 on:
   schedule:
-    - cron: '50 7 * * *'
-      timezone: "Asia/Bangkok"
-    - cron: '*/14 8-17 * * *'
-      timezone: "Asia/Bangkok"
+    - cron: '50 0 * * *'    # 07:50 Bangkok (UTC+7)
+    - cron: '*/14 1-10 * * *'  # 08:00-17:00 Bangkok
   workflow_dispatch:
 
 jobs:
