@@ -2,8 +2,8 @@ name: Wake Render
 
 on:
   schedule:
-    - cron: '50 0 * * *'    # 07:50 น. ปลุกก่อน
-    - cron: '0 1-11 * * *'  # 08:00-18:00 น. ping ทุกชั่วโมง
+    - cron: '50 0 * * *'      # 07:50 น. ปลุก
+    - cron: '*/14 1-11 * * *' # 08:00-18:00 น. ping ทุก 14 นาที
   workflow_dispatch:
 
 jobs:
