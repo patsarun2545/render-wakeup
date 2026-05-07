@@ -1,22 +1,33 @@
 name: Wake Render
-
 on:
   schedule:
-    - cron: '50 0 * * *'    # 07:50 Bangkok (UTC+7)
-    - cron: '*/14 1-10 * * *'  # 08:00-17:59 Bangkok
+    - cron: '45 0 * * *'  # 07:45 Bangkok (UTC+7)
+    - cron: '50 0 * * *'  # 07:50 Bangkok (UTC+7)
+    - cron: '55 0 * * *'  # 07:55 Bangkok (UTC+7)
   workflow_dispatch:
+
+concurrency:
+  group: wake-render
+  cancel-in-progress: true
 
 jobs:
   wake:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-
     steps:
       - name: Ping dress-rental-web
-        run: curl --max-time 90 https://dress-rental-web.onrender.com/ping || true
-
+        run: |
+          for i in 1 2 3; do
+            curl --max-time 90 -f https://dress-rental-web.onrender.com/ping && break
+            echo "Retry $i failed, waiting..."
+            sleep 10
+          done
       - name: Ping rental-management-system
-        run: curl --max-time 90 https://rental-management-system-8wzu.onrender.com/ping || true
-
+        run: |
+          for i in 1 2 3; do
+            curl --max-time 90 -f https://rental-management-system-8wzu.onrender.com/ping && break
+            echo "Retry $i failed, waiting..."
+            sleep 10
+          done
       - name: Log result
         run: echo "Pinged at $(TZ='Asia/Bangkok' date)"
